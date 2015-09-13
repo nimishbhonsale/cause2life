@@ -1,0 +1,29 @@
+﻿@model causetolife.Models.Cause
+
+@{
+    ViewBag.Title = "Create";
+}
+@Html.ActionLink("Search for a cause", "Index", null, new { @style = "float:right", @class = "buttonlink" })
+<h2>Add a new cause ..</h2> 
+<br/>
+@using (Html.BeginForm("Create", "Cause", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div style="font-weight:bold">Name</div>
+    @Html.TextBoxFor(x => x.Name, new { @placeholder = "Cause Name" }) <br /><br />
+    <div style="font-weight:bold">Description</div>
+    @Html.TextAreaFor(x => x.Description, new { @placeholder = "Cause Description" })<br /><br />
+    <div style="font-weight:bold">Cause Image</div>
+    <input type="file" name="attachment" placeholder="cause image" /><br /><br />
+    <div style="font-weight:bold">Budget</div>
+    @Html.TextBoxFor(x => x.Budget, new { @placeholder = "Budget in INR" })<br /><br />
+    <div style="font-weight:bold">Start Date</div>
+    @Html.TextBoxFor(x => x.StartDate, new { @placeholder = "Start Date" })<br /><br />
+    <div style="font-weight:bold">End Date</div>
+    @Html.TextBoxFor(x => x.EndDate, new { @placeholder = "End Date" })<br /><br />
+    <div style="font-weight:bold">Address</div>
+    @Html.TextAreaFor(x => x.Geographies, new { @placeholder = "Address" })<br /><br />
+    <div style="font-weight:bold; margin-bottom:5px;">Country</div>
+    @Html.DropDownListFor(x => x.Country, (SelectList)ViewBag.CountryList, new { @placeholder = "Country"})<br /><br />
+    <input type="submit" value="Save" />
+}
+

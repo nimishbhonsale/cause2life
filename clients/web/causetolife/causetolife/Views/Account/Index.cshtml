@@ -1,0 +1,35 @@
+﻿@model List<causetolife.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm("Index", "Cause", new { name = @ViewBag.name }, FormMethod.Post, new { @style = "float:left; width:100%" }))
+{
+    <div>
+        @Html.ActionLink("Add a new User", "Create", null, new { @style = "float:right", @class = "buttonlink" })
+        @Html.TextBox("name", (object)ViewBag.name, new { @placeholder = "Search a user by username", @style = "float:left; border-radius:5px;" })
+        <input type="submit" value="Search" style="float:left; border-radius:5px;" />
+    </div><br /><br /><br />
+
+    if (Model != null && Model.Count() > 0)
+    {
+        <span style="float:right">@Model.Count() users</span><br /><br />
+        <div style="overflow-y:scroll; height:520px;">
+            @foreach (causetolife.Models.User proj in Model)
+            {
+                <div style="height:40px;display:block;background:#ebdada; padding:2px;margin-bottom:2px;border-radius:5px;">
+                    @proj.Username - @string.Format("{0}, {1}" , proj.LastName, proj.FirstName)
+                    @Html.ActionLink("Details", "Details", new { id = proj.Id }, new { @style = "float:right;margin-top:5px;", @class = "buttonlink" })
+                    @using (Html.BeginForm("Delete", "User", new { id = @proj.Id }, FormMethod.Post, new { @style = "float:right" }))
+                    {
+                        <input type="submit" value="Delete" style="float:right" />
+                    }
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div>No causes found..</div>
+    }
+}

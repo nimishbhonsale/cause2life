@@ -1,0 +1,13 @@
+﻿@model causetolife.Models.Cause
+
+@{
+    ViewBag.Title = "Donation";
+}
+@using (Html.BeginForm("Donate", "Cause", null, FormMethod.Post, null))
+{
+    <div style="font-weight:bold">Amount</div>
+    @Html.TextBox("amount", (object)ViewBag.amount, new { @placeholder = "Amount" }) <br /><br />
+    <input type="submit" value="Donate" />
+    @Html.Hidden("causeId", (object)ViewBag.causeId) <br /><br />
+}
+

@@ -1,0 +1,49 @@
+﻿@model causetolife.Models.Cause
+
+@{
+    ViewBag.Title = "Details";
+}
+@Html.ActionLink("Back", "Index", null, new { @style = "float:right;margin-top:5px;", @class = "buttonlink" })
+<h2>@Model.Name</h2> 
+<br/>
+    <div style="font-weight:bold">Description</div>
+    @Html.LabelFor(x => x.Description)<br /><br />
+    <div style="font-weight:bold">Budget</div>
+    @Html.LabelFor(x => x.Budget)<br /><br />
+    <div style="font-weight:bold">Start Date</div>
+    @Html.LabelFor(x => x.StartDate)<br /><br />
+    <div style="font-weight:bold">End Date</div>
+    @Html.LabelFor(x => x.EndDate)<br /><br />
+    <div style="font-weight:bold">Address</div>
+    @Html.LabelFor(x => x.Geographies)<br /><br />
+    <div style="font-weight:bold; margin-bottom:5px;">Country</div>
+    @Html.LabelFor(x => x.Country)<br /><br />
+    <div style="font-weight:bold; margin-bottom:5px;">Owners</div>
+    <div style="overflow-y:scroll; height:50px;">
+        @if(Model.Owners != null)
+        {
+            foreach (var proj in Model.Owners)
+            {
+                Html.ActionLink(@proj,"Index",new {name=@proj}); <span>&nbsp;&nbsp;</span>
+            }
+        }
+        else
+        {
+            <div>No owners found ..</div>
+        }
+    </div>
+    <div style="font-weight:bold; margin-bottom:5px;">Sponsorers</div>
+    <div style="overflow-y:scroll; height:50px;">
+        @if(Model.Sponsers != null)
+        {
+            foreach (causetolife.Models.Donator proj in Model.Sponsers)
+            {
+                @Html.ActionLink(@proj.Username + "(" + @proj.Amount.ToString() + ")","Index",new {name=@proj}); <span>&nbsp;&nbsp;</span>
+            }
+        }
+        else
+        {
+            <div>No sponsors found ..</div>
+        }
+    </div>
+

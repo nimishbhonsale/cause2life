@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Cause to Life</title>
+    <link href="~/Images/logo.png" rel="shortcut icon" type="image/png" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="position:relative">
+    <header>
+        @if (Session["UserProfile"] != null)
+        {
+            using (Html.BeginForm("LogOff", "Account"))
+            {
+                var userId = ((causetolife.Models.User)Session["UserProfile"])._id;
+                <div style="float:left;margin-left:2.5%;color:darkblue;">
+                    <img src="~/Images/user.png" width="30" height="30" style="border-radius: 50%; border: 1px solid #c8c8c8;float:left;" />
+                    <span style="font-size:12px;margin-left:10px;margin-top:15px;">Welcome @(((causetolife.Models.User)Session["UserProfile"]).Username)</span>
+                    <input type="submit" value="signout" class="linkbutton" style="color: blue; font-size: 12px; margin-top: 15px; margin-left: 10px;" />
+                    @Html.ActionLink("My Profile", "Edit", "Account", new { id = userId })
+                </div>
+            }
+        }
+
+        <div style="max-width:90%;margin-top:25px;">
+            <div class="float-right">
+                <br />
+                <small>&copy; @DateTime.Now.Year Cause2Life</small>&nbsp;&nbsp;
+                <small><a href="http://citruspay.com/"><img src="~/Images/citruspay.png" height="15" width="15" /></a>&nbsp;Powered by Citrus Pay</small>
+            </div>
+            <div class="float-right" style="vertical-align: top; margin-right:25%; padding-left: 10px">
+                <a href="~/"><img src="~/Images/logo.png" height="25" width="25" /></a> &nbsp;
+                <font style="color:darkblue;font-size:2em">Cause to Life</font>
+            </div>
+            
+        </div>
+    </header>
+    <div id="body">
+        @*<hr style="width: 95%;height:2px;"/>*@
+        
+            <div class="menu3">
+                @Html.ActionLink("Home", "Index", "Home")
+                @Html.ActionLink("About", "About", "Home")
+                @Html.ActionLink("Contact Us", "Contact", "Home")
+                @if (Session["UserProfile"] != null)
+                {
+                    @Html.ActionLink("Causes", "Index", "Cause")  
+                    @Html.ActionLink("Administration", "Index", "Administration")
+                }
+            </div>
+        
+        <div class="menu3sub"> </div>
+        <section class="main-content" style="margin-left:5%;max-width:78%">
+            @RenderBody()
+        </section>
+
+        @if (Session["UserProfile"] != null)
+        {
+            <div style="right:0; width:225px;position:absolute;top:75px;margin-right:2px;margin-top:15px;overflow-y:scroll;height:650px;">
+                <div style="background-color: darkgray; height: 20px;text-align: center; color: white; margin-right: 2px;">Activity Feed</div>
+                @for (int i = 1; i < 12; i++)
+                {
+                    <div style="height: 65px; border-bottom: 1px solid lightgray; margin-right: 2px;">
+                        <img src="~/Images/user.png" width="40" height="40" style="border-radius: 50%; border: 1px solid #c8c8c8;float:left;margin:5px;margin-top:10px;" />
+                        <div style="word-wrap:break-word;font-size:9px;margin-top:10px;margin:2px;text-align:justify">
+                            Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    @*<footer>
+            <div style="text-align: center; border-top: 1px solid darkblue;width:95%;margin-left:2.5%">
+               <p>&copy; @DateTime.Now.Year BBJ WorldWide All rights reserved</p>
+            </div>
+        </footer>*@
+    
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿@model causetolife.Models.User
+
+@{
+    ViewBag.Title = "Create";
+}
+@Html.ActionLink("Search for a user", "Index", null, new { @style = "float:right", @class = "buttonlink" })
+<h2>Sign up ..</h2>
+<br />
+@using (Html.BeginForm("Create", "Account", null, FormMethod.Post))
+{
+    <div style="font-weight:bold">Username</div>
+    @Html.TextBoxFor(x => x.Username, new { @placeholder = "Username" }) <br /><br />
+    <div style="font-weight:bold">Password</div>
+    @Html.PasswordFor(x => x.Password, new { @placeholder = "Password" })<br /><br />
+    <div style="font-weight:bold">First Name</div>
+    @Html.TextBoxFor(x => x.FirstName, new { @placeholder = "First Name" })<br /><br />
+    <div style="font-weight:bold">Last Name</div>
+    @Html.TextBoxFor(x => x.LastName, new { @placeholder = "Last Name" })<br /><br />
+    <div style="font-weight:bold">Are you siging up as:</div>
+    @Html.RadioButtonFor(x => x.ProfileType, "Individual") <span>Individual</span>
+    @Html.RadioButtonFor(x => x.ProfileType, "Enterprise") <span>Enterprise</span>
+    @Html.RadioButtonFor(x => x.ProfileType, "NGO") <span>NGO</span>
+    <br/>
+    <br/>
+    <div style="font-weight:bold">Tell us more about yourself or the organization that you represent?</div>
+    @Html.TextAreaFor(x => x.ProfileDetails, new { @placeholder = "Details" })<br /><br />
+    <div style="font-weight:bold">Address</div>
+    @Html.TextAreaFor(x => x.Address, new { @placeholder = "Address" })<br /><br />
+    <div style="font-weight:bold">Phone</div>
+    @Html.TextBoxFor(x => x.Phone, new { @placeholder = "Phone" })<br /><br />
+    <div style="font-weight:bold">Email</div>
+    @Html.TextBoxFor(x => x.Email, new { @placeholder = "Email" })<br /><br />
+    <input type="submit" value="Save" />
+}
+

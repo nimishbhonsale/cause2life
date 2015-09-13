@@ -1,0 +1,6 @@
+extends layout
+block content
+   h1 #{causes.length} causes found
+   -for(var c in causes)
+         a(href='/causes/#{causes[c].id}') #{causes[c].name}
+         br

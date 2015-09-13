@@ -1,0 +1,63 @@
+﻿@model causetolife.Models.LoginModel
+
+@{
+    ViewBag.Title = "";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<div style="width: 90%; margin-left:10%; height: 100%; text-align:center;">
+    <br />
+    <section class="social" id="socialLoginForm" style="float:left;width:70%">
+        <div>
+            <p style="text-align:justify">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus commodo urna. Ut suscipit leo a nisl lacinia, eget feugiat velit finibus. Curabitur condimentum sagittis mi, non scelerisque risus maximus pharetra. Vestibulum id turpis felis. Nunc facilisis, felis sed ultrices tincidunt, ipsum ex aliquam risus, vitae egestas tortor libero ac augue. Mauris ac elit mattis, laoreet diam in, fermentum lectus. Phasellus et est et libero congue scelerisque. Mauris placerat orci enim, quis ornare ante tempor non. Morbi sagittis dictum fermentum. Maecenas placerat hendrerit lectus in tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+            </p>
+            <p style="text-align:center;margin-top:50px;">
+                <img src="~/Images/projects.png" height="100" />
+            </p> <br />
+            <p style="text-align:justify">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus commodo urna. Ut suscipit leo a nisl lacinia, eget feugiat velit finibus. Curabitur condimentum sagittis mi, non scelerisque risus maximus pharetra. Vestibulum id turpis felis. Nunc facilisis, felis sed ultrices tincidunt, ipsum ex aliquam risus, vitae egestas tortor libero ac augue. Mauris ac elit mattis, laoreet diam in, fermentum lectus. Phasellus et est et libero congue scelerisque. Mauris placerat orci enim, quis ornare ante tempor non. Morbi sagittis dictum fermentum. Maecenas placerat hendrerit lectus in tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi at sem ac neque eleifend tincidunt. Nullam in sapien et leo sodales interdum ut pretium nibh. Proin lacinia nulla sem, sed pellentesque purus ornare ac.
+            </p>
+        </div>
+    </section>
+    <br />
+    <section id="loginForm" style="border: 1px solid #c8c8c8;border-radius:10px;float:right;">
+        @using (Html.BeginForm("Login", "Account"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Sign in Form</legend>
+                <ol>
+                    <li style="text-align:center">
+                        <img src="~/Images/user.png" width="80" height="80" style="border-radius: 50%; border: 1px solid #c8c8c8;" /><br />
+                    </li>
+                    <li>
+                        @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Username" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </li>
+                    <li>
+                        @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </li>
+                    <li>
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(x => x.RememberMe, new { @class = "checkbox" })
+                        @Html.ActionLink("Sign Up","Create", "Account")
+                    </li>
+                    <li>
+                        <input type="submit" value="                        Sign in                        " style="float: right; border-radius: 10px;" />
+                    </li>
+                </ol>
+            </fieldset>
+        }
+    </section>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,43 @@
+﻿@model List<causetolife.Models.Cause>
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm("Index", "Cause", new { name = @ViewBag.name }, FormMethod.Post, new { @style = "float:left; width:100%" }))
+{
+    <div>
+        @Html.ActionLink("Start a new Cause", "Create", null, new { @style = "float:right", @class = "buttonlink" })
+        @Html.TextBox("name", (object)ViewBag.name, new { @placeholder = "Search a cause by name or location", @style = "float:left; border-radius:5px;" })
+        <input type="submit" value="Search" style="float:left; border-radius:5px;" />
+    </div><br /><br /><br />
+
+    if (Model != null && Model.Count() > 0)
+    {
+        <span style="float:right">@Model.Count() causes</span><br /><br />
+        <div style="overflow-y:scroll; height:520px;">
+            @foreach (causetolife.Models.Cause proj in Model)
+            {
+                <div style="height:40px;display:block;background:#ebdada; padding:2px;margin-bottom:2px;border-radius:5px;">
+                    @proj.Name (@proj.Description) <span style="color:red">[Budget: Rs.@proj.Budget | Donations: Rs. @(proj.Sponsers == null ? 0 : proj.Sponsers.Sum(x=>x.Amount)) ]</span>
+    <span style="color:blue"> expires on @proj.EndDate.ToString("dd-MMM-yyyy")</span>
+        
+                    @Html.ActionLink("Show", "Details", new { id = proj._id }, new { @style = "float:right;margin-top:5px;", @class = "buttonlink" })
+                    @Html.ActionLink("Donation", "Donation", new { id = proj._id }, new { @style = "float:right;margin-top:5px;", @class = "buttonlink" })
+      
+                    @using (Html.BeginForm("Like", "Cause", new { id = @proj._id }, FormMethod.Post, new { @style = "float:right" }))
+                    {
+                        <input type="submit" value="Like (@proj.Votes)" style="float:right" />
+                    }
+                    @*@using (Html.BeginForm("Donate", "Cause", new { id = @proj._id }, FormMethod.Post, new { @style = "float:right" }))
+                    {
+                        <input type="submit" value="Donate" style="float:right" />
+                    }*@
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div>No causes found..</div>
+    }
+}
